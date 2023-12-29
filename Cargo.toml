@@ -1,0 +1,18 @@
+[package]
+name = "remarkable2-downloader"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+anyhow = "1.0.77"
+async-recursion = "1.0.5"
+clap = { version = "4.4.12", features = ["derive"] }
+colored = "2.1.0"
+futures = "0.3.30"
+reqwest ={ version = "0.11.23", features=["json"]}
+serde = "1.0.193"
+serde_derive = "1.0.193"
+serde_json = "1.0.108"
+tokio = { version = "1.35.1", features = ["full"] }
