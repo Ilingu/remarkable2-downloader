@@ -14,35 +14,30 @@ use crate::{
     utils::{check_output_path, is_client_up, print_err},
 };
 
-/// Simple program to greet a person
+/// Simple CLI script to download files from your remarkable
 #[derive(Parser, Debug)]
 #[command(name = "Remarkable2 Downloader")]
 #[command(author = "Ilingu")]
-#[command(version = "0.1")]
+#[command(version = "0.2")]
 #[command(about = "Partial to full backup of your remarkable2 documents", long_about = None)]
 #[command(propagate_version = true)]
 struct RmkdwldCli {
-    #[arg(long, default_value_t = false)]
+    #[arg(long, default_value_t = false, verbatim_doc_comment)]
     /// If set to true, when one upload/download fail the CLI will continue to upload/download the remaining files
-    ///
     /// Obviously a report will be shown in case of failure of some upload/download
     udp_mode: bool,
 
     /// When copying the downloaded files to your local file system if a file already at the location where a downloaded file should be copied, the CLI will:
-    ///
     /// - If set to false (default): halt the execution and return an error without touching at the already present file
-    ///
     /// - If set to true: override everything inside it
-    ///
-    /// Please note that if 'smart_mode' is set to true (which is the default), 'override_mode' will automatically be set to true
-    /// to ensure that it can override file that have been modified in remarkable but not yet in local file system
-    #[arg(long, default_value_t = false)]
+    /// Please note that if 'smart_mode' is set to true (which is the default), 'override_mode' will automatically be set to
+    /// true to ensure that it can override file that have been modified in remarkable but not yet in local file system
+    #[arg(long, default_value_t = false, verbatim_doc_comment)]
     override_mode: bool,
 
     /// Whether it should redownload files that already have been downloaded without any change between it,
-    ///
     /// if set to true (default) it won't redownload file that hasn't been modified and that are already present to the output-path
-    #[arg(long, default_value_t = true)]
+    #[arg(long, default_value_t = true, verbatim_doc_comment)]
     smart_mode: bool,
 
     /* Remarkable does not support concurrent request, thus I removed these features
