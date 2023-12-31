@@ -32,7 +32,7 @@ macro_rules! udp_continue {
     ($result:expr, $udp_mode:expr, $error_msg:expr) => {
         match $result {
             Ok(d) => d,
-            Err(_) => {
+            Err(why) => {
                 if $udp_mode {
                     println!(
                         "{}",
@@ -40,7 +40,7 @@ macro_rules! udp_continue {
                     );
                     continue;
                 } else {
-                    return Err(anyhow!($error_msg));
+                    return Err(anyhow!(format!("{}: {why}", $error_msg)));
                 }
             }
         }
@@ -91,4 +91,12 @@ pub fn check_output_path(path: &str, allow_creation: bool) -> Result<()> {
         }
     }
     Ok(())
+}
+
+pub fn ensure_file_extension(name: &str) -> String {
+    if name.ends_with(".pdf") {
+        name.to_string()
+    } else {
+        format!("{name}.pdf")
+    }
 }
